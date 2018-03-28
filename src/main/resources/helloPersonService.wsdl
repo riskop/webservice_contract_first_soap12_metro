@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+<wsdl:definitions
+    name="helloPersonService"
+    targetNamespace="http://hello.org/hellopersonservice/1.0"
+    xmlns:tns="http://hello.org/hellopersonservice/1.0"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+     -->
+<!-- 
+for SOAP 1.2 you have to change 
+http://schemas.xmlsoap.org/wsdl/soap/
+to
+http://schemas.xmlsoap.org/wsdl/soap12/
+ -->
+<wsdl:definitions
+    name="helloPersonService"
+    targetNamespace="http://hello.org/hellopersonservice/1.0"
+    xmlns:tns="http://hello.org/hellopersonservice/1.0"
+    xmlns:str="http://hello.org/hellopersonservice/1.0/datastructures"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap12/"
+    >
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://hello.org/hellopersonservice/1.0">
+        <!-- 
+        <xsd:include schemaLocation="helloPersonService.xsd" />
+            <xsd:import schemaLocation="helloPersonService.xsd"
+                        namespace="http://hello.org/hellopersonservice/1.0"/>
+                         -->
+            <xsd:import schemaLocation="helloPersonService.xsd"
+                        namespace="http://hello.org/hellopersonservice/1.0/datastructures"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="HelloPersonServiceRequest">
+        <wsdl:part name="HelloPersonServiceRequest" element="str:HelloPersonServiceRequest"/>
+    </wsdl:message>
+    <wsdl:message name="HelloPersonServiceResponse">
+        <wsdl:part name="HelloPersonServiceResponse" element="str:HelloPersonServiceResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="HelloPersonServicePortType">
+        <wsdl:operation name="greetPerson">
+            <wsdl:input name="HelloPersonServiceRequest" message="tns:HelloPersonServiceRequest"/>
+            <wsdl:output name="HelloPersonServiceResponse" message="tns:HelloPersonServiceResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="HelloPersonServiceBinding" type="tns:HelloPersonServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="greetPerson">
+            <soap:operation style="document" soapAction="http://hello.org/HelloPersonService/greetPerson"/>
+            <wsdl:input name="HelloPersonServiceRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="HelloPersonServiceResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="HelloPersonService">
+        <wsdl:port name="HelloPersonServicePort" binding="tns:HelloPersonServiceBinding">
+        <!-- 
+          TODO: there should be no hardcoded location here.
+          the location should be filled by the wsdl publicator
+            <soap:address location="http://127.0.0.1:8080/service/helloPersonService" />
+         -->
+            <soap:address location="DONT_HARDCODE_IT_HERE" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

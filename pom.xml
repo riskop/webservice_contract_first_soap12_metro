@@ -1,0 +1,84 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>webservice_contract_first_soap12</groupId>
+    <artifactId>webservice_contract_first_soap12</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- <failOnMissingWebXml>false</failOnMissingWebXml> -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <build>
+        <plugins> <!-- usage of jax-ws maven plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
+
+            <plugin>
+
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>2.4.1</version>
+                <!-- -->
+                <executions>
+                    <execution>
+                        <id>wsimport-from-jdk</id>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration> <!--wsdls file directory -->
+                    <wsdlDirectory>src/main/resources</wsdlDirectory> <!-- which wsdl file -->
+                    <wsdlFiles>
+                        <wsdlFile>helloPersonService.wsdl</wsdlFile>
+                    </wsdlFiles>
+                    <sourceDestDir>target/generated-sources</sourceDestDir>
+
+                    <!-- needed with soap 1.2  -->
+                    <extension>true</extension>
+                    
+                    <packageName>pack</packageName>
+                    <!-- <keep>true</keep> -->
+                    <!-- <sourceDestDir>target/generated/java</sourceDestDir> -->
+                    <!-- Needed with JAXP 1.5 -->
+                    <!-- -->
+                    <vmArgs>
+                        <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
+                    </vmArgs>
+                </configuration>
+            </plugin> <!-- adding generated source -->
+        </plugins>
+    </build>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.sun.xml.ws/jaxws-rt -->
+        <!-- 
+        <dependency> 
+            <groupId>com.sun.xml.ws</groupId> 
+            <artifactId>jaxws-rt</artifactId> 
+            <version>2.2.10</version> 
+        </dependency> -->
+        
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp/okhttp -->
+        <dependency>
+            <groupId>com.squareup.okhttp</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>2.7.5</version>
+            <scope>test</scope>
+        </dependency>
+        
+    </dependencies>
+</project>

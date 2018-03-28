@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified"
+            xmlns="http://hello.org/hellopersonservice/1.0"
+            targetNamespace="http://hello.org/hellopersonservice/1.0">
+             -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified"
+            xmlns="http://hello.org/hellopersonservice/1.0/datastructures"
+            targetNamespace="http://hello.org/hellopersonservice/1.0/datastructures">
+    <xsd:element name="HelloPersonServiceRequest" type="HelloPersonServiceRequestType"/>
+    <xsd:element name="HelloPersonServiceResponse" type="HelloPersonServiceResponseType"/>
+ 
+    <xsd:complexType name="HelloPersonServiceRequestType">
+    	<xsd:sequence>
+    	    <xsd:element name="Person" type="PersonType"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+     
+    <xsd:complexType name="HelloPersonServiceResponseType">
+    	<xsd:sequence>
+	        <xsd:element name="Greetings" type="xsd:string"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+ 
+    <xsd:complexType name="PersonType">
+        <xsd:sequence>
+            <xsd:element name="FirstName" type="xsd:string"/>
+            <xsd:element name="LastName" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
